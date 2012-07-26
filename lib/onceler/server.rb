@@ -5,6 +5,8 @@ module Onceler
     disable :show_exceptions
     enable :logging, :dump_errors
 
+    set :root, Onceler.root_folder
+
     # to support global state, process only one request at a time
     # obviously this is not incredibly scalable
     enable :lock
@@ -12,30 +14,42 @@ module Onceler
     @@cache = Cache.new
 
     not_found do
-      "I think we took a wrong turn! took a wrong turn turn ...\n"
+      erb :not_found
     end
 
     get '/' do
-      "This is onceler!\n"
+      erb :root
     end
 
     get '/once/:key/' do |key|
       begin
-        data = @@cache.get(key)
+        @data = @@cache.get(key)
       rescue IndexError
         raise Sinatra::NotFound
       end
 
-      "This key was created by #{data.ip_address} at #{Time.at(data.created)}\n"
+      erb :info
+    end
+
+    get '/once/' do
+      redirect '/'
     end
 
     post '/once/' do
-      data = Entry.new(params.fetch('content'), request.ip, params['filename'])
+      if params['filename'] && params['filename'].length > 0
+        filename = params['filename']
+      else
+        filename = nil
+      end
+      content = params.fetch('content')
+      data = Entry.new(content, request.host, request.ip, filename)
 
       key = @@cache.add(data)
 
-      url = Onceler.base_url + "/once/#{key}/"
-      url + "\n"
+      #secret_url = Onceler.base_url + "/once/#{key}/"
+      @secret_key = @@cache.add(data)
+
+      erb :link
     end
 
     post '/once/:key/get' do |key|
@@ -47,9 +61,11 @@ module Onceler
 
       if data.attachment?
         attachment data.filename
+        data.content
+      else
+        @data = data
+        erb :fetch
       end
-
-      data.content
     end
   end
 end

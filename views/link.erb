@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Onceler Link</title>
+    <style type="text/css">
+      #link {
+        width: 28em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Onceler</h1>
+    <h3>Your secret link:</h3>
+    <%
+    base = @request.url
+    link = base + @secret_key + '/'
+    %>
+    <input id="link" type="text" readonly="readonly" selected="selected" value="<%= link %>" />
+    <script type="text/javascript">
+      document.getElementById('link').focus();
+    </script>
+    <p>
+      <a href="../">Make another</a>
+    </p>
+  </body>
+</html>
+<% # vim: set ft=eruby sw=2 ts=2 tw=79: %>

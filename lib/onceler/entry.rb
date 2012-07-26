@@ -2,11 +2,12 @@ require 'securerandom'
 
 module Onceler
   class Entry
-    attr_reader :content, :ip_address, :filename, :created
+    attr_reader :content, :remote_host, :remote_ip, :filename, :created
 
-    def initialize(content, ip_address, filename=nil)
+    def initialize(content, remote_host, remote_ip, filename=nil)
       @content = content
-      @ip_address = ip_address
+      @remote_host = remote_host
+      @remote_ip = remote_ip
       @filename = filename
       @created = Time.now.to_i
     end

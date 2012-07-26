@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Onceler Secret</title>
+    <style type="text/css">
+    #secret {
+      border 1px solid #ccc;
+      padding 1em;
+    }
+    </style>
+  </head>
+  <body>
+    <h1>Onceler</h1>
+    <h3>
+      I will call you by Whisper-ma-Phone,
+      for the secrets I tell you are for your ears alone.
+    </h3>
+
+    <pre id="secret"><%= @data.content %></pre>
+
+    <p>
+      This secret will be gone forever when you refresh.
+      It has already been deleted from the server.
+    </p>
+
+    <p>This secret was created from <%= @data.remote_host %> at <%= Time.at(@data.created) %></p>
+
+    <p>
+      <a href="../../">Share your own secret</a>
+    </p>
+  </body>
+</html>
+<% # vim: set ft=eruby sw=2 ts=2 tw=79: %>
