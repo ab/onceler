@@ -15,9 +15,10 @@
     base = @request.url
     link = base + @secret_key + '/'
     %>
-    <input id="link" type="text" readonly="readonly" selected="selected" value="<%= link %>" />
+    <input id="link" type="text" readonly=readonly value="<%= link %>" />
     <script type="text/javascript">
       document.getElementById('link').focus();
+      document.getElementById('link').select();
     </script>
     <p>
       <a href="../">Make another</a>
