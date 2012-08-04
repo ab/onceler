@@ -2,6 +2,7 @@ require 'logger'
 require 'yaml'
 
 require 'rubygems'
+require 'bundler/setup'
 require 'sinatra/base'
 
 module Onceler
