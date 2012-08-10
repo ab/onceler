@@ -5,6 +5,7 @@
     <style type="text/css">
       #link {
         width: 28em;
+        font-family: monospace;
       }
     </style>
   </head>
@@ -15,7 +16,8 @@
     base = @request.url
     link = base + @secret_key + '/'
     %>
-    <input id="link" type="text" readonly=readonly value="<%= link %>" />
+    <!-- <input id="link" type="text" readonly=readonly value="<%= link %>" /> -->
+    <pre id="link"><%= link %></pre>
     <script type="text/javascript">
       document.getElementById('link').focus();
       document.getElementById('link').select();
