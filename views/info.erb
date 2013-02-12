@@ -14,6 +14,7 @@
 
     <form method="post" action="./get">
       <button type="submit">View secret</button>
+      (Button will only work once.)
     </form>
 
     <p>This secret was created from <%= @data.remote_host %> at <%= Time.at(@data.created) %></p>

@@ -17,7 +17,7 @@
     link = base + @secret_key + '/'
     %>
     <!-- <input id="link" type="text" readonly=readonly value="<%= link %>" /> -->
-    <pre id="link"><%= link %></pre>
+    <pre id="link"><a href="<%= link %>"><%= link %></a></pre>
     <script type="text/javascript">
       document.getElementById('link').focus();
       document.getElementById('link').select();
