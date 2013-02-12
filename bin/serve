@@ -2,4 +2,12 @@
 
 require File.join(File.dirname(__FILE__), '../lib/onceler')
 
+if ARGV.include?('-h')
+  STDERR.puts "Usage: #{File.basename($0)} [BIND_ADDR [BIND_PORT]]"
+  exit 1
+end
+
+Onceler::Server.set :bind, ARGV.fetch(0) if ARGV[0]
+Onceler::Server.set :port, ARGV.fetch(1) if ARGV[1]
+
 Onceler::Server.run!

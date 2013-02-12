@@ -2,8 +2,8 @@ require 'uri'
 
 module Onceler
   class Server < Sinatra::Base
-    set :bind, Onceler::BIND
-    set :port, Onceler::PORT
+    set :bind, '127.0.0.1'
+    set :port, 6623
     disable :show_exceptions
     enable :logging, :dump_errors
 
