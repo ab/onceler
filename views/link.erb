@@ -12,16 +12,15 @@
   <body>
     <h1>Onceler</h1>
     <h3>Your secret link:</h3>
-    <%
-    base = @request.url
-    link = base + @secret_key + '/'
-    %>
-    <!-- <input id="link" type="text" readonly=readonly value="<%= link %>" /> -->
-    <pre id="link"><a href="<%= link %>"><%= link %></a></pre>
+    <% link = @secret_url %>
+    <!--
+    <input id="link" type="text" readonly=readonly value="<%= link %>" />
     <script type="text/javascript">
       document.getElementById('link').focus();
       document.getElementById('link').select();
     </script>
+    -->
+    <pre id="link"><a href="<%= link %>"><%= link %></a></pre>
     <p>
       <a href="../">Make another</a>
     </p>

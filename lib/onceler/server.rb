@@ -1,3 +1,5 @@
+require 'uri'
+
 module Onceler
   class Server < Sinatra::Base
     set :bind, Onceler::BIND
@@ -46,8 +48,18 @@ module Onceler
 
       key = @@cache.add(data)
 
-      #secret_url = Onceler.base_url + "/once/#{key}/"
-      @secret_key = @@cache.add(data)
+      # make an absolute URL relative to the user-provided URL
+      uri = URI.parse(request.url)
+      uri.path = "/once/#{key}/"
+      uri.query = nil
+      uri.fragment = nil
+      @secret_url = uri.to_s
+
+      unless ['http', 'https'].include?(uri.scheme)
+        halt 400, 'ERROR: Cowardly refusing to make URI of type ' + uri.scheme
+      end
+
+      @@cache.add(data)
 
       erb :link
     end
