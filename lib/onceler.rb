@@ -11,7 +11,6 @@ module Onceler
   end
 end
 
-$:.unshift File.dirname(__FILE__)
-require 'onceler/cache'
-require 'onceler/entry'
-require 'onceler/server'
+require_relative './onceler/cache'
+require_relative './onceler/entry'
+require_relative './onceler/server'

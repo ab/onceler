@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require File.join(File.dirname(__FILE__), '../lib/onceler')
+require_relative '../lib/onceler'
 
 if ARGV.include?('-h')
   STDERR.puts "Usage: #{File.basename($0)} [BIND_ADDR [BIND_PORT]]"

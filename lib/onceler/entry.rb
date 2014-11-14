@@ -1,5 +1,3 @@
-require 'securerandom'
-
 module Onceler
   class Entry
     attr_reader :content, :remote_host, :remote_ip, :filename, :created
