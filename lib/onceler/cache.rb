@@ -29,11 +29,15 @@ module Onceler
       @data.delete(key) or raise IndexError.new("key #{key.inspect} not found")
     end
 
+    def add_entry(entry)
+      @data[entry.key] = entry
+    end
+
     def add_by_key(key, value)
       @data[key] = value
     end
 
-    def add(value)
+    def add_random(value)
       key = self.class.random_key
       add_by_key(key, value)
       key

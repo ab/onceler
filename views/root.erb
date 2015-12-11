@@ -4,17 +4,25 @@
     <title>Onceler</title>
   </head>
   <body>
-    <h1>Onceler</h1>
+    <h1>Onceler<%= @path ? ": " + @path : '' %></h1>
     <p>
       The onceler listens to your secrets and gives you a link to share them
       exactly once.
     </p>
-    <form method="post" action="./once/">
+    <form method="post" action="/once/">
+<% if @key %>
+      <input type="hidden" name="key" value="<%= @key %>" />
+<% end %>
       <textarea name="content" rows="5" cols="50"></textarea>
       <br />
-      <label>Filename (optional): <input type="text" name="filename" />
+      <label>Filename (optional): <input type="text" name="filename" /></label>
       <br /><br />
-      <button type="submit">Create my one-time link</button>
+<% if @mode != :multi %>
+      <button type="submit" name="action" value="once">Create one-time link</button>
+<% end %>
+<% if @mode != :once %>
+      <button type="submit" name="action" value="multi">Create multi-use link</button>
+<% end %>
     </form>
   </body>
 </html>

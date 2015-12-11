@@ -5,7 +5,7 @@ module Onceler
   class Server < Sinatra::Base
     set :bind, '127.0.0.1'
     set :port, 6623
-    disable :show_exceptions
+
     enable :logging, :dump_errors
 
     set :root, Onceler.root_folder
@@ -23,18 +23,49 @@ module Onceler
       erb :not_found
     end
 
+    error do
+      erb :error
+    end
+
     get '/' do
       erb :root
     end
 
     get '/once/:key/' do |key|
       begin
-        @data = @@cache.get(key)
+        @entry = @@cache.get(key)
       rescue IndexError
         raise Sinatra::NotFound
       end
 
       erb :info
+    end
+
+    # you can view content of multi-use keys with GET request
+    get '/clip/:key/' do |key|
+      begin
+        entry = @@cache.get(key)
+      rescue IndexError
+        # TODO: rename :root to :create
+        @mode = :multi
+        @path = request.path
+        @key = key
+        halt erb(:root)
+      end
+
+      # Invalid to try to access a single-use key as multi-use.
+      if entry.once?
+        raise Sinatra::NotFound
+      end
+
+      if entry.attachment?
+        attacentry entry.filename
+        entry.content
+      else
+        @entry = entry
+        @delete_link = entry.url(request.url, delete_link: true)
+        erb :fetch
+      end
     end
 
     get '/once/' do
@@ -48,38 +79,41 @@ module Onceler
         filename = nil
       end
       content = params.fetch('content')
-      data = Entry.new(content, request.host, request.ip, filename)
 
-      key = @@cache.add(data)
-
-      # make an absolute URL relative to the user-provided URL
-      uri = URI.parse(request.url)
-      uri.path = "/once/#{key}/"
-      uri.query = nil
-      uri.fragment = nil
-      @secret_url = uri.to_s
-
-      unless ['http', 'https'].include?(uri.scheme)
-        halt 400, 'ERROR: Cowardly refusing to make URI of type ' + uri.scheme
+      case params.fetch('action')
+      when 'once'
+        once = true
+      when 'multi'
+        once = false
+      else
+        raise ArgumentError.new("Invalid action: " + params['action'].inspect)
       end
 
-      @@cache.add(data)
+      key = params.fetch('key', nil)
+
+      entry = Entry.new(content, request.host, request.ip, filename:filename,
+                       once: once, key: key)
+      @@cache.add_entry(entry)
+
+      # make an absolute URL relative to the user-provided URL
+      @secret_url = entry.url(request.url)
 
       erb :link
     end
 
     post '/once/:key/' do |key|
       begin
-        data = @@cache.delete(key)
+        entry = @@cache.delete(key)
       rescue IndexError
         raise Sinatra::NotFound
       end
 
-      if data.attachment?
-        attachment data.filename
-        data.content
+      if entry.attachment?
+        attacentry entry.filename
+        entry.content
       else
-        @data = data
+        @entry = entry
+        @deleted = true
         erb :fetch
       end
     end

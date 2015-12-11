@@ -9,6 +9,9 @@ module Onceler
   def self.root_folder
     File.join(File.dirname(__FILE__), '..')
   end
+
+  # Base Onceler exception class
+  class Error < StandardError; end
 end
 
 require_relative './onceler/cache'
