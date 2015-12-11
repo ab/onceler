@@ -64,7 +64,7 @@ module Onceler
       erb :link
     end
 
-    post '/once/:key/get' do |key|
+    post '/once/:key/' do |key|
       begin
         data = @@cache.delete(key)
       rescue IndexError
