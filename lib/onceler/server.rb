@@ -1,4 +1,5 @@
 require 'uri'
+require 'rack/ssl-enforcer'
 
 module Onceler
   class Server < Sinatra::Base
@@ -8,6 +9,9 @@ module Onceler
     enable :logging, :dump_errors
 
     set :root, Onceler.root_folder
+
+    # force HTTPS in production
+    use Rack::SslEnforcer, :only_environments => ['production']
 
     # to support global state, process only one request at a time
     # obviously this is not incredibly scalable
