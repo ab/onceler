@@ -117,5 +117,11 @@ module Onceler
         erb :fetch
       end
     end
+
+    helpers do
+      def escape(text)
+        Rack::Utils.escape_html(text)
+      end
+    end
   end
 end

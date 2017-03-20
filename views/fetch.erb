@@ -17,7 +17,7 @@
       for the secrets I tell you are for your ears alone.
     </h3>
 
-    <pre id="secret"><%= @entry.content %></pre>
+    <pre id="secret"><%= escape @entry.content %></pre>
 
 <% if @entry.once? || @deleted %>
     <p>
@@ -33,7 +33,7 @@
     </p>
 <% end %>
 
-    <p>This secret was created from <%= @entry.remote_host %> at <%= Time.at(@entry.created) %></p>
+    <p>This secret was created from <%= escape @entry.remote_host %> at <%= Time.at(@entry.created) %></p>
 
     <p>
       <a href="../../">Share your own secret</a>

@@ -17,7 +17,7 @@
       (Button will only work once.)
     </form>
 
-    <p>This secret was created from <%= @entry.remote_host %> at <%= Time.at(@entry.created) %></p>
+    <p>This secret was created from <%= escape @entry.remote_host %> at <%= Time.at(@entry.created) %></p>
 
     <p>
       <a href="../../">Share your own secret</a>
