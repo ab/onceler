@@ -59,7 +59,7 @@ module Onceler
       end
 
       if entry.attachment?
-        attacentry entry.filename
+        attachment entry.filename
         entry.content
       else
         @entry = entry
@@ -109,7 +109,7 @@ module Onceler
       end
 
       if entry.attachment?
-        attacentry entry.filename
+        attachment entry.filename
         entry.content
       else
         @entry = entry
