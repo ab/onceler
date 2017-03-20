@@ -5,7 +5,9 @@
 <%= erb :'partials/header' %>
   </head>
   <body>
-    <h1>Onceler<%= @path ? ": " + @path : '' %></h1>
+    <%= erb :'partials/bodyheader' %>
+
+    <h1>Onceler<%= escape(@path ? ": " + @path : '') %></h1>
     <p>
       The onceler listens to your secrets and gives you a link to share them
       exactly once.
