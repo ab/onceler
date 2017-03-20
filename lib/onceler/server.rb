@@ -1,5 +1,6 @@
 require 'uri'
 require 'rack/ssl-enforcer'
+require 'resolv'
 
 module Onceler
   class Server < Sinatra::Base
@@ -91,8 +92,15 @@ module Onceler
 
       key = params.fetch('key', nil)
 
-      entry = Entry.new(content, request.host, request.ip, filename:filename,
-                       once: once, key: key)
+      begin
+        request_host = Resolv.getname(request.ip)
+      rescue Resolv::ResolvError => err
+        puts 'Failed to resolve host: ' + err.inspect
+        request_host = nil
+      end
+
+      entry = Entry.new(content, request_host, request.ip, filename:filename,
+                        once: once, key: key)
       @@cache.add_entry(entry)
 
       # make an absolute URL relative to the user-provided URL

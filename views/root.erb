@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Onceler</title>
+<%= erb :'partials/header' %>
   </head>
   <body>
     <h1>Onceler<%= @path ? ": " + @path : '' %></h1>
@@ -15,7 +16,7 @@
 <% end %>
       <textarea name="content" rows="5" cols="50"></textarea>
       <br />
-      <label>Filename (optional): <input type="text" name="filename" /></label>
+      <input type="text" name="filename" placeholder="Filename (optional)" />
       <br /><br />
 <% if @mode != :multi %>
       <button type="submit" name="action" value="once">Create one-time link</button>

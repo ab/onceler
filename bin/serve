@@ -2,7 +2,7 @@
 
 require_relative '../lib/onceler'
 
-if ARGV.include?('-h')
+if ARGV.include?('-h') || ARGV.include?('--help')
   STDERR.puts "Usage: #{File.basename($0)} [BIND_ADDR [BIND_PORT]]"
   exit 1
 end

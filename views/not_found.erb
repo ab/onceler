@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Onceler - Not Found</title>
+<%= erb :'partials/header' %>
   </head>
   <body>
     <h1>Not Found</h1>
@@ -15,7 +16,7 @@
     <img src="/img/notfound.jpg" alt="lorax" />
     <% # TODO: find a good UNLESS image %>
     <p>
-      <a href="../">Share another secret</a>
+      <form><button formaction="../">Share another secret</button></form>
     </p>
   </body>
 </html>

@@ -8,6 +8,7 @@
         font-family: monospace;
       }
     </style>
+<%= erb :'partials/header' %>
   </head>
   <body>
     <h1>Onceler</h1>
@@ -22,7 +23,7 @@
     -->
     <pre id="link"><a href="<%= link %>"><%= link %></a></pre>
     <p>
-      <a href="../">Make another</a>
+      <form><button formaction="../">Make another</button></form>
     </p>
   </body>
 </html>
