@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.2.4' if ENV['HEROKU']
+ruby '~> 2.3.0'
 
 gem 'sinatra'
 gem 'thin'
