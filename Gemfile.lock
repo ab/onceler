@@ -2,16 +2,16 @@ GEM
   remote: https://rubygems.org/
   specs:
     daemons (1.2.6)
-    eventmachine (1.2.5)
+    eventmachine (1.2.7)
     mustermann (1.0.2)
-    rack (2.0.4)
-    rack-protection (2.0.1)
+    rack (2.0.5)
+    rack-protection (2.0.3)
       rack
     rack-ssl-enforcer (0.2.9)
-    sinatra (2.0.1)
+    sinatra (2.0.3)
       mustermann (~> 1.0)
       rack (~> 2.0)
-      rack-protection (= 2.0.1)
+      rack-protection (= 2.0.3)
       tilt (~> 2.0)
     thin (1.7.2)
       daemons (~> 1.0, >= 1.0.9)
@@ -31,4 +31,4 @@ RUBY VERSION
    ruby 2.3.3p222
 
 BUNDLED WITH
-   1.14.6
+   1.16.1
