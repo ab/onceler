@@ -3,6 +3,8 @@ name: Onceler Deploy
 on:
   push:
     branches: [master]
+  schedule:
+    - cron: '30 9 * * 0' # Every Sunday at 9:30AM UTC (5:30AM EST)
 
 jobs:
   deploy:
