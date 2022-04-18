@@ -1,18 +1,3 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Onceler Link</title>
-    <style type="text/css">
-      #link {
-        width: 28em;
-        font-family: monospace;
-      }
-    </style>
-<%= erb :'partials/header' %>
-  </head>
-  <body>
-    <%= erb :'partials/bodyheader' %>
-
     <h1>Onceler</h1>
     <h3>Your secret link:</h3>
     <% link = @secret_url %>
@@ -27,6 +12,3 @@
     <p>
       <form><button formaction="../">Make another</button></form>
     </p>
-  </body>
-</html>
-<% # vim: set ft=eruby sw=2 ts=2 tw=79: %>

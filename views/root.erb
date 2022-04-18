@@ -1,12 +1,3 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Onceler</title>
-<%= erb :'partials/header' %>
-  </head>
-  <body>
-    <%= erb :'partials/bodyheader' %>
-
     <h1>Onceler<%= escape(@path ? ": " + @path : '') %></h1>
     <p>
       The onceler listens to your secrets and gives you a link to share them
@@ -27,6 +18,3 @@
       <button type="submit" name="action" value="multi">Create multi-use link</button>
 <% end %>
     </form>
-  </body>
-</html>
-<% # vim: set ft=eruby sw=2 ts=2 tw=79: %>

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'uri'
 require 'rack/ssl-enforcer'
 require 'resolv'
@@ -21,15 +23,18 @@ module Onceler
     @@cache = Cache.new
 
     not_found do
-      erb :not_found
+      @title = 'Onceler - Not Found'
+      erb :not_found, layout: :layout
     end
 
     error do
-      erb :error
+      @title = 'Onceler - Error'
+      erb :error, layout: :layout
     end
 
     get '/' do
-      erb :root
+      @title = 'Onceler'
+      erb :root, layout: :layout
     end
 
     get '/once/:key/' do |key|
@@ -39,7 +44,8 @@ module Onceler
         raise Sinatra::NotFound
       end
 
-      erb :info
+      @title = 'Onceler Secret'
+      erb :info, layout: :layout
     end
 
     # you can view content of multi-use keys with GET request
@@ -61,7 +67,8 @@ module Onceler
       else
         @entry = entry
         @delete_link = entry.url(request.url, delete_link: true)
-        erb :fetch
+        @title = 'Onceler Secret'
+        erb :fetch, layout: :layout
       end
     end
 
@@ -102,7 +109,8 @@ module Onceler
       # make an absolute URL relative to the user-provided URL
       @secret_url = entry.url(request.url)
 
-      erb :link
+      @title = 'Onceler Link'
+      erb :link, layout: :layout
     end
 
     post '/once/:key/' do |key|
@@ -118,7 +126,8 @@ module Onceler
       else
         @entry = entry
         @deleted = true
-        erb :fetch
+        @title = 'Onceler Secret'
+        erb :fetch, layout: :layout
       end
     end
 

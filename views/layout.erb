@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%= @title or raise NotImplementedError.new('Must set @title') %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+      body {
+        margin: 3rem auto 0;
+        max-width: 650px;
+        line-height: 1.6;
+        font-size: 18px;
+        color: #444;
+        padding: 0 10px;
+      }
+      #page-wrap {
+        position: relative;
+        min-height: calc(100vh - 3rem);
+      }
+      #content-wrap {
+        padding-bottom: 5rem;
+      }
+      #footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 2.5rem;
+        font-size: smaller;
+      }
+      h1,h2,h3 {
+        line-height: 1.2;
+      }
+      button {
+        font-size: 18px;
+        color: #444;
+        padding: 0.5em;
+        margin-right: 0.25em;;
+      }
+      input {
+        font-size: 18px;
+        color: #444;
+      }
+      textarea {
+        font-size: 16px;
+        color: #444;
+        width: 100%;
+      }
+      #secret {
+        border: 1px solid #ccc;
+        padding: 1em;
+        display: table;
+      }
+      #link {
+        width: 28em;
+        font-family: monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="https://github.com/ab/onceler/">
+      <img style="position: absolute; top: 0; right: 0; border: 0; width: 149px; height: 149px;" src="/img/github-right-graphite@2x.png" alt="Fork me on GitHub">
+    </a>
+
+    <div id="page-wrap">
+      <div id="content-wrap">
+        <%= yield %>
+      </div>
+
+      <% # https://boook.link/9780394823379 %>
+      <footer id="footer">
+        With thanks to Dr. Seuss. Buy <i>The Lorax</i> on
+        <a href="https://www.amazon.com/dp/0394823370">Amazon</a> or at
+        <a href="https://www.indiebound.org/book/9780394823379">your local bookstore</a>.
+      </footer>
+    </div>
+  </body>
+</html>
