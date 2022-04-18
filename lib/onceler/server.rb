@@ -47,11 +47,7 @@ module Onceler
       begin
         entry = @@cache.get(key)
       rescue IndexError
-        # TODO: rename :root to :create
-        @mode = :multi
-        @path = request.path
-        @key = key
-        halt erb(:root)
+        raise Sinatra::NotFound
       end
 
       # Invalid to try to access a single-use key as multi-use.
