@@ -37,6 +37,10 @@ module Onceler
       erb :root, layout: :layout
     end
 
+    get '/healthcheck' do
+      "OK\n"
+    end
+
     get '/once/:key/' do |key|
       begin
         @entry = @@cache.get(key)
