@@ -21,6 +21,10 @@ module Onceler
       !!@once
     end
 
+    def created_by
+      remote_host || remote_ip
+    end
+
     # Make an absolute URL relative to the user-provided request_url.
     #
     # @param request_url [String]

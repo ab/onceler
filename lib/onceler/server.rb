@@ -95,14 +95,16 @@ module Onceler
 
       key = params.fetch('key', nil)
 
+      request_ip = get_request_ip
+
       begin
-        request_host = Resolv.getname(request.ip)
+        request_host = Resolv.getname(request_ip)
       rescue Resolv::ResolvError => err
         puts 'Failed to resolve host: ' + err.inspect
         request_host = nil
       end
 
-      entry = Entry.new(content, request_host, request.ip, filename:filename,
+      entry = Entry.new(content, request_host, request_ip, filename:filename,
                         once: once, key: key)
       @@cache.add_entry(entry)
 
@@ -134,6 +136,15 @@ module Onceler
     helpers do
       def escape(text)
         Rack::Utils.escape_html(text)
+      end
+
+      def get_request_ip
+        if ENV['FLY_APP_NAME']
+          # running in fly.io, need to get request IP from custom header
+          request.env.fetch('HTTP_FLY_CLIENT_IP')
+        else
+          request.ip
+        end
       end
     end
   end

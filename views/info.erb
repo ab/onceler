@@ -9,7 +9,7 @@
       (Button will only work once.)
     </form>
 
-    <p>This secret was created from <%= escape @entry.remote_host %> at <%= Time.at(@entry.created) %></p>
+    <p>This secret was created from <%= escape @entry.created_by %> at <%= Time.at(@entry.created) %></p>
 
     <p>
       <form><button formaction="../../">Share your own secret</button></form>

@@ -22,7 +22,7 @@
 
     <p>
       This secret was created from
-      <code><%= escape(@entry.remote_host || @entry.remote_ip) %></code>
+      <code><%= escape(@entry.created_by) %></code>
       at <%= Time.at(@entry.created) %>
     </p>
 
