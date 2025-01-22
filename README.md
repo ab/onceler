@@ -24,10 +24,12 @@ The Onceler listens to your secrets and shares them exactly once.
 ## Dependencies
 
 Since Onceler stores secrets in volatile memory, it has no external
-dependencies and no database. All Ruby library dependencies are listed in the
-[Gemfile](./Gemfile).
+dependencies and no database. This extreme simplicity makes it very portable
+and easy to deploy anywhere, but it also means that you can run only one app
+process at a time. So Onceler is not appropriate for high traffic use.
 
-Onceler is written in Ruby. It requires Ruby >= 2.7.
+Onceler is written in Ruby. It requires Ruby >= 3.0.
+All Ruby library dependencies are listed in the [Gemfile](./Gemfile).
 
 [Rbenv](https://github.com/rbenv/rbenv) provides a convenient way to manage
 installations of multiple Ruby versions.
