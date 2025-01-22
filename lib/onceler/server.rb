@@ -14,7 +14,8 @@ module Onceler
     set :root, Onceler.root_folder
 
     # force HTTPS in production
-    use Rack::SslEnforcer, :only_environments => ['production']
+    # [temporarily disabled, unclear if this is needed]
+    use Rack::SslEnforcer, only_environments: ['production'], except: '/healthcheck', hsts: true
 
     # to support global state, process only one request at a time
     # obviously this is not incredibly scalable
@@ -38,7 +39,7 @@ module Onceler
     end
 
     get '/healthcheck' do
-      "OK\n"
+      "OK version=v0.4.0 env=#{settings.environment.inspect}\n"
     end
 
     get '/once/:key/' do |key|

@@ -1,13 +1,44 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'optparse'
 
 require_relative '../lib/onceler'
 
-if ARGV.include?('-h') || ARGV.include?('--help')
-  STDERR.puts "Usage: #{File.basename($0)} [BIND_ADDR [BIND_PORT]]"
-  exit 1
+BaseName = File.basename($0)
+
+def main
+  optparse = OptionParser.new do |opts|
+    opts.banner = <<~EOM
+      Usage: #{BaseName} [OPTION]... [BIND_ADDR [BIND_PORT]]"
+
+      Start the Onceler web server.
+
+      Options:
+    EOM
+
+    opts.on('-h', '--help', 'Display this message') do
+      $stderr.puts opts, ''
+      exit 0
+    end
+
+    opts.on('-e', '--env ENV', 'Set APP_ENV=<ENV>') do |arg|
+      Onceler::Server.set :environment, arg
+      Onceler::Server.set :server_settings, {environment: arg}
+    end
+  end
+
+  begin
+    optparse.parse!
+  rescue OptionParser::InvalidOption => err
+    $stderr.puts("#{BaseName}: #{err.message}")
+    exit 1
+  end
+
+  Onceler::Server.set :bind, ARGV.fetch(0) if ARGV[0]
+  Onceler::Server.set :port, ARGV.fetch(1) if ARGV[1]
+
+  Onceler::Server.run!
 end
 
-Onceler::Server.set :bind, ARGV.fetch(0) if ARGV[0]
-Onceler::Server.set :port, ARGV.fetch(1) if ARGV[1]
-
-Onceler::Server.run!
+main

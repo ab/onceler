@@ -1,1 +1,1 @@
-web: bundle exec bin/serve 0.0.0.0 $PORT
+web: bundle exec bin/serve -e production 0.0.0.0 $PORT
