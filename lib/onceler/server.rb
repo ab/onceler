@@ -39,7 +39,7 @@ module Onceler
     end
 
     get '/healthcheck' do
-      "OK version=v0.4.0 env=#{settings.environment.inspect}\n"
+      "OK version=v0.4.1 env=#{settings.environment.inspect}\n"
     end
 
     get '/once/:key/' do |key|
