@@ -17,7 +17,7 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential
 
 # Install application gems
-COPY Gemfile* .
+COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
 
