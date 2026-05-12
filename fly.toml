@@ -4,7 +4,7 @@
 #
 
 app = "onceler"
-primary_region = "bos"
+primary_region = "ewr"
 
 [build]
 
